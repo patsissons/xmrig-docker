@@ -1,13 +1,13 @@
-diff --git a/src/Options.cpp b/src/Options.cpp
-index 939075f..f9989c6 100644
---- a/src/Options.cpp
-+++ b/src/Options.cpp
-@@ -476,7 +476,7 @@ bool Options::parseArg(int key, uint64_t arg)
-         break;
+diff --git a/src/donate.h b/src/donate.h
+index 46f26b7..96e2251 100644
+--- a/src/donate.h
++++ b/src/donate.h
+@@ -44,7 +44,7 @@
+  * BTC: 1P7ujsXeX7GxQwHNnJsRMgAdNkFZmNVqJT
+  */
+ constexpr const int kDefaultDonateLevel = 5;
+-constexpr const int kMinimumDonateLevel = 1;
++constexpr const int kMinimumDonateLevel = 0;
 
-     case 1003: /* --donate-level */
--        if (arg < 1 || arg > 99) {
-+        if (arg < 0 || arg > 99) {
-             return true;
-         }
 
+ #endif /* __DONATE_H__ */
