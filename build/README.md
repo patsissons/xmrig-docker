@@ -10,9 +10,16 @@ docker pull alpine
 docker build -t patsissons/xmrig:build build
 docker run --rm -v $PWD/root/xmrig:/xmrig patsissons/xmrig:build
 
+# push the latest build container if any changes are made
+docker push patsissons/xmrig:build
+
 # build the xmrig runtime container image
-docker pull alpine
-docker build -t patsissons/xmrig .
+docker build -t patsissons/xmrig:develop .
+
+# push the latest xmrig binary to git and trigger a new docker build
+git add root/xmrig/xmrig
+git commit -m "publishing latest xmrig binary"
+git push origin 
 ```
 
 ## Environment
