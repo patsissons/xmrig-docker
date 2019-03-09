@@ -18,7 +18,19 @@ docker run -it -d --name xmrig patsissons/xmrig -o ca.minexmr.com:5555 --donate-
 
 ## Building
 
-A [Dockerfile](https://github.com/patsissons/xmrig-docker/blob/master/build/Dockerfile) is also included for [building](https://github.com/patsissons/xmrig-docker/tree/master/build) the `xmrig` app. See the [README](https://github.com/patsissons/xmrig-docker/tree/master/build/README.md) for more detailed instructions on how to build the runtime container.
+This image uses a multi-stage build, all that should be required is `docker build .` to build the latest image.
+
+### Environment
+
+You can adjust the following docker environment variables to customize the build process.
+
+* `GIT_REPOSITORY`: use a custom git repo for `xmrig` (default is `https://github.com/xmrig/xmrig.git`)
+* `XMRIG_CMAKE_FLAGS`: use custom cmake flags (default is empty)
+
+You can adjust the following docker build args
+
+* `DISTRO_NAME`: image to use for building and runtime (default is `alpine`)
+* `DISTRO_VERSION`: image version to use for building and runtime (default is `latest`)
 
 ## Donations
 
