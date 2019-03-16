@@ -1,20 +1,28 @@
 # xmrig docker container
 
-[![Docker Stars](https://img.shields.io/docker/stars/patsissons/xmrig.svg)](https://hub.docker.com/r/patsissons/xmrig/)[![Docker Pulls](https://img.shields.io/docker/pulls/patsissons/xmrig.svg)](https://hub.docker.com/r/patsissons/xmrig/)[![Docker Build Status](https://img.shields.io/docker/build/patsissons/xmrig.svg)](https://hub.docker.com/r/patsissons/xmrig/)
+[![Docker Stars](https://img.shields.io/docker/stars/patsissons/xmrig.svg)](https://hub.docker.com/r/patsissons/xmrig/) [![Docker Pulls](https://img.shields.io/docker/pulls/patsissons/xmrig.svg)](https://hub.docker.com/r/patsissons/xmrig/) [![Docker Build Status](https://img.shields.io/docker/cloud/build/patsissons/xmrig.svg)](https://hub.docker.com/r/patsissons/xmrig/builds) [![Docker Layers](https://images.microbadger.com/badges/image/patsissons/xmrig.svg)](https://microbadger.com/images/patsissons/xmrig)
 
 This container allows running [xmrig](https://github.com/xmrig/xmrig) in a docker container.
 
-## Docker
-
-This docker image in available on [docker hub](https://hub.docker.com/r/patsissons/xmrig/).
-
 ## Example
 
+* A simple one liner to get the container mining right away
+
 ```bash
-# run a dockerized miner
-# -o and all following arguments are passed to the xmrig miner process
-docker run -it -d --name xmrig patsissons/xmrig -o ca.minexmr.com:5555 --donate-level 1 -u 47NHecs6qjvDcbx3eW6cDGDwdm3gDqbHs7G8hzPYRxf3YRTcDJw8kXhDxfHinsjHUwVwdFusSn76UHkaz68KurUgHvFmPMH.github -p x
+docker run -it -d --name xmrig patsissons/xmrig -o ca.minexmr.com:5555 -u 47NHecs6qjvDcbx3eW6cDGDwdm3gDqbHs7G8hzPYRxf3YRTcDJw8kXhDxfHinsjHUwVwdFusSn76UHkaz68KurUgHvFmPMH.github-xmrig -p x
 ```
+
+* A more [comprehensive script](https://github.com/patsissons/xmrig-docker/blob/master/start-xmrig.sh) to simplify the process of starting and uprading the miner. Running `sudo ./start-xmrig.sh` will pull down the latest version while still mining, then stop and upgrade the container to resume mining with minimal downtime. If you want to use this
+script with the latest `develop` builds, run `sudo ./start-xmrig.sh develop` instead. The script is ready to accept overrides for a few environment variables to simplify multi-host distribution.
+
+|Environment Variable|Default Value|Notes|
+|-|-|-|
+|`ADDRESS`|N/A|make sure to replace the default with your own address or you will be mining to my address|
+|`HOST`|`hostname -s`|override this if you want a custom host name that is different from your actual host name|
+|`PORT`|`8080`|if another container or process is already using port `8080` this can be adjusted|
+|`POOL_HOST`|N/A|make sure to replace this with your own pool remote uri|
+|`POOL_USER`|`$ADDRESS.$HOST-$TAG`|adjust this to your needs|
+|`POOL_PASS`|`x`|adjust this to your needs|
 
 ## Building
 
@@ -38,6 +46,4 @@ If you find this docker image useful, donations for work on dockerizing the buil
 
 * BTC: `1LNY9wSPs913Y9jXMTrrVze1E41nhm6Qv7`
 * LTC: `LhnwdbrnQaQbjDkqxXFmxXGPcFhMBA9gFu`
-* ETH: `a05c67acbec8afc30287704540b215284a7c21a9`
 * XMR: `47NHecs6qjvDcbx3eW6cDGDwdm3gDqbHs7G8hzPYRxf3YRTcDJw8kXhDxfHinsjHUwVwdFusSn76UHkaz68KurUgHvFmPMH`
-* XRP: `rG9vAB1rbgDW3Ds7HFqJeF9Pi4fGRbEs93`
