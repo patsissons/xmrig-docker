@@ -9,7 +9,7 @@ This container allows running [xmrig](https://github.com/xmrig/xmrig) in a docke
 * A simple one liner to get the container mining right away
 
 ```bash
-docker run -it -d --name xmrig patsissons/xmrig -o ca.minexmr.com:5555 -u 47NHecs6qjvDcbx3eW6cDGDwdm3gDqbHs7G8hzPYRxf3YRTcDJw8kXhDxfHinsjHUwVwdFusSn76UHkaz68KurUgHvFmPMH.github-xmrig -p x
+docker run -it -d --name xmrig patsissons/xmrig -o ca.minexmr.com:5555 -u 47NHecs6qjvDcbx3eW6cDGDwdm3gDqbHs7G8hzPYRxf3YRTcDJw8kXhDxfHinsjHUwVwdFusSn76UHkaz68KurUgHvFmPMH.github-xmrig -p x -a cn/r
 ```
 
 * A more [comprehensive script](https://github.com/patsissons/xmrig-docker/blob/master/start-xmrig.sh) to simplify the process of starting and uprading the miner. Running `sudo ./start-xmrig.sh` will pull down the latest version while still mining, then stop and upgrade the container to resume mining with minimal downtime. If you want to use this
@@ -23,6 +23,7 @@ script with the latest `develop` builds, run `sudo ./start-xmrig.sh develop` ins
 |`POOL_HOST`|N/A|make sure to replace this with your own pool remote uri|
 |`POOL_USER`|`$ADDRESS.$HOST-$TAG`|adjust this to your needs|
 |`POOL_PASS`|`x`|adjust this to your needs|
+|`POOL_ALGO`|`cn/r`|algorithm to use, see [docs](https://github.com/xmrig/xmrig/blob/master/doc/ALGORITHMS.md#algorithm-names)|
 
 ## Building
 
