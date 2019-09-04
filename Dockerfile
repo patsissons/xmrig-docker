@@ -3,34 +3,42 @@ ARG DISTRO_VERSION=latest
 
 FROM ${DISTRO_NAME}:${DISTRO_VERSION} as build
 
-ENV GIT_REPOSITORY https://github.com/xmrig/xmrig.git
-ENV XMRIG_CMAKE_FLAGS=
+ENV GIT_REPOSITORY=https://github.com/xmrig/xmrig.git \
+    GIT_BRANCH=v3.1.1
+ENV CMAKE_FLAGS=
 
-COPY root /
+COPY donate-level.patch /tmp
 
-WORKDIR /build
+WORKDIR /tmp
 
-RUN  apk update \
-  && apk upgrade \
+RUN  set -x \
+  && apk update \
   && apk add --no-cache ca-certificates git build-base cmake libuv-dev libmicrohttpd-dev openssl-dev util-linux-dev \
-  && git clone $GIT_REPOSITORY /build/xmrig \
+  && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted hwloc-dev \
+  && git clone --single-branch --depth 1 --branch $GIT_BRANCH $GIT_REPOSITORY xmrig \
   && git -C xmrig apply ../donate-level.patch \
   && cd xmrig \
-  && cmake ${XMRIG_CMAKE_FLAGS} . \
+  && cmake ${CMAKE_FLAGS} . \
   && make \
   && rm -rf /var/cache/apk/*
 
 FROM ${DISTRO_NAME}:${DISTRO_VERSION}
 
-COPY --from=build /build/xmrig/xmrig /usr/local/bin/
-
-RUN  adduser -S -D -H -h /xmrig xmrig \
+RUN  set -x \
+  && adduser -S -D -h /config miner \
   && apk update \
   && apk upgrade \
   && apk add --no-cache libuv libmicrohttpd openssl util-linux \
-  && rm -rf /var/cache/apk/*
+  && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted hwloc \
+  && rm -rf /var/lib/{apt,dpkg,cache,log}
 
-USER xmrig
+COPY --from=build /tmp/xmrig/xmrig /usr/local/bin/
 
-ENTRYPOINT [ "xmrig" ]
-CMD [ "--version" ]
+USER miner
+
+WORKDIR /config
+VOLUME /config
+
+ENTRYPOINT ["xmrig"]
+
+CMD ["--help"]
