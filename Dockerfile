@@ -4,7 +4,7 @@ ARG DISTRO_VERSION=latest
 FROM ${DISTRO_NAME}:${DISTRO_VERSION} as build
 
 ENV GIT_REPOSITORY=https://github.com/xmrig/xmrig.git \
-    GIT_BRANCH=v3.1.1
+    GIT_BRANCH=v3.2.0
 ENV CMAKE_FLAGS=
 
 COPY donate-level.patch /tmp
