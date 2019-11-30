@@ -2,7 +2,10 @@ ARG CUDA_VERSION=10.1
 ARG CUDA_UBUNTU_VERSION=16.04
 ARG AMDGPU_VERSION=17.40-514569
 ARG GIT_REPOSITORY=https://github.com/xmrig/xmrig.git
-ARG GIT_BRANCH=v4.6.2-beta
+ARG GIT_BRANCH=v5.0.0
+
+ARG GIT_REPOSITORY_CUDA=https://github.com/xmrig/xmrig-cuda.git
+ARG GIT_BRANCH_CUDA=v2.0.1-beta
 
 FROM nvidia/cuda:${CUDA_VERSION}-devel-ubuntu${CUDA_UBUNTU_VERSION} AS build-cuda
 
@@ -10,8 +13,8 @@ ARG GIT_REPOSITORY_CUDA
 ARG GIT_BRANCH_CUDA
 
 ENV DEBIAN_FRONTEND=noninteractive \
-    GIT_REPOSITORY=https://github.com/xmrig/xmrig-cuda.git \
-    GIT_BRANCH=v2.0.0-beta
+    GIT_REPOSITORY=${GIT_REPOSITORY_CUDA} \
+    GIT_BRANCH=${GIT_BRANCH_CUDA}
 ENV CMAKE_FLAGS "-DCUDA_LIB=/usr/local/cuda/lib64/stubs/libcuda.so -DCMAKE_CXX_FLAGS=-std=c++11"
 ENV PACKAGE_DEPS "build-essential cmake git"
 
