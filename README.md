@@ -33,13 +33,17 @@ This image uses a multi-stage build, all that should be required is `docker buil
 
 You can adjust the following docker environment variables to customize the build process.
 
-* `GIT_REPOSITORY`: use a custom git repo for `xmrig` (default is `https://github.com/xmrig/xmrig.git`)
-* `XMRIG_CMAKE_FLAGS`: use custom cmake flags (default is empty)
+- `GIT_REPOSITORY`: use a custom git repo for `xmrig` (default is `https://github.com/xmrig/xmrig.git`)
+- `GIT_BRANCH`: use a custom branch or tag
+- `CMAKE_FLAGS`: use custom cmake flags
+- `PACKAGE_DEPS`: use custom installation packages
 
 You can adjust the following docker build args
 
-* `DISTRO_NAME`: image to use for building and runtime (default is `alpine`)
-* `DISTRO_VERSION`: image version to use for building and runtime (default is `latest`)
+- `CUDA_VERSION`: CUDA container version (default is `10.1`)
+- `CUDA_UBUNTU_VERSION`: Ubuntu version of CUDA container (default is `16.04`)
+- `AMDGPU_VERSION`: AMD driver version (default is `17.40-514569`)
+- `ALPINE_VERSION`: image to use for alpine minimalist container (default is `latest`)
 
 ## Donations
 
