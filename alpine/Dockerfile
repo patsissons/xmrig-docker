@@ -1,6 +1,6 @@
 ARG ALPINE_VERSION=latest
 ARG GIT_REPOSITORY=https://github.com/xmrig/xmrig.git
-ARG GIT_BRANCH=v5.2.1
+ARG GIT_BRANCH=v5.3.0
 
 FROM alpine:${ALPINE_VERSION} AS build
 
