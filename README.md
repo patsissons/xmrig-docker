@@ -4,7 +4,7 @@
 
 This container allows running [xmrig](https://github.com/xmrig/xmrig) in a docker container.
 
-## Example
+## Usage
 
 * A simple one liner to get the container mining right away
 
@@ -25,6 +25,33 @@ script with the latest `develop` builds, run `sudo ./start-xmrig.sh develop` ins
 |`POOL_PASS`|`x`|adjust this to your needs|
 |`POOL_ALGO`|`cn/r`|algorithm to use, see [docs](https://github.com/xmrig/xmrig/blob/master/doc/ALGORITHMS.md#algorithm-names)|
 
+## Host configuration
+
+Everything has been tested on [Ubuntu 16 LTS (Xenial)](http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso)
+
+### AMD requirements
+
+AMD requires only drivers installed on the host to interact with the hardware.
+
+- install the [`AMDGPU-Pro` drivers (`17.40-514569`)](https://www.amd.com/en/support/kb/release-notes/rn-prorad-lin-amdgpupro-17-40-0) on the host machine and then run the docker image with `--device=/dev/dri --device=/dev/kfd --group-add=video`.
+
+You can verify that everything is working on the host with the following commands
+
+- check the status of `amdgpu-pro` by running `/opt/amdgpu-pro/bin/clinfo`
+- test the container integration by running `docker run -it --rm --device=/dev/dri --device=/dev/kfd --group-add=video --entrypoint=/bin/bash patsissons/xmrig -c /opt/amdgpu-pro/bin/clinfo`
+
+### NVIDIA requirements
+
+NVIDIA requires both a docker runtime and cuda drivers installed on the host to interact with the hardware.
+
+- Install the [Ubuntu 16.04 `cuda-drivers` (`10.2`)](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64) (use `apt-get install --no-install-recommends nvidia-container-toolkit` to install)
+- Install the [`nvidia-docker` runtime](https://github.com/NVIDIA/nvidia-docker) (use `apt-get install --no-install-recommends cuda-drivers` to install)
+
+You can verify that everythign is working on the host with the following commands
+
+- check the status of the `cuda-drivers` by running `/usr/bin/nvidia-smi`
+- test the container integration by running `docker run -it --rm --runtime=nvidia --entrypoint=/bin/bash patsissons/xmrig -c /usr/bin/nvidia-smi`
+
 ## Building
 
 This image uses a multi-stage build, all that should be required is `docker build .` to build the latest image.
@@ -40,7 +67,7 @@ You can adjust the following docker environment variables to customize the build
 
 You can adjust the following docker build args
 
-- `CUDA_VERSION`: CUDA container version (default is `10.1`)
+- `CUDA_VERSION`: CUDA container version (default is `10.2`)
 - `CUDA_UBUNTU_VERSION`: Ubuntu version of CUDA container (default is `16.04`)
 - `AMDGPU_VERSION`: AMD driver version (default is `17.40-514569`)
 - `ALPINE_VERSION`: image to use for alpine minimalist container (default is `latest`)
