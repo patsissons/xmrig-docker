@@ -44,8 +44,8 @@ You can verify that everything is working on the host with the following command
 
 NVIDIA requires both a docker runtime and cuda drivers installed on the host to interact with the hardware.
 
-- Install the [Ubuntu 16.04 `cuda-drivers` (`10.2`)](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64) (use `apt-get install --no-install-recommends nvidia-container-toolkit` to install)
-- Install the [`nvidia-docker` runtime](https://github.com/NVIDIA/nvidia-docker) (use `apt-get install --no-install-recommends cuda-drivers` to install)
+- Install the [Ubuntu 16.04 `cuda-drivers` (`11.0`)](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64) (use `apt-get install --no-install-recommends nvidia-container-toolkit` to install)
+- Install the [`nvidia-docker` runtime](https://github.com/NVIDIA/nvidia-docker/wiki#how-do-i-install-the-nvidia-driver) (use `apt-get install --no-install-recommends cuda-drivers` to install)
 
 You can verify that everythign is working on the host with the following commands
 
@@ -67,7 +67,7 @@ You can adjust the following docker environment variables to customize the build
 
 You can adjust the following docker build args
 
-- `CUDA_VERSION`: CUDA container version (default is `10.2`)
+- `CUDA_VERSION`: CUDA container version (default is `11.0`)
 - `CUDA_UBUNTU_VERSION`: Ubuntu version of CUDA container (default is `16.04`)
 - `AMDGPU_VERSION`: AMD driver version (default is `17.40-514569`)
 - `ALPINE_VERSION`: image to use for alpine minimalist container (default is `latest`)
