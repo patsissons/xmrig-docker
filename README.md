@@ -33,7 +33,7 @@ Everything has been tested on [Ubuntu 16 LTS (Xenial)](http://archive.ubuntu.com
 
 AMD requires only drivers installed on the host to interact with the hardware.
 
-- install the [`AMDGPU-Pro` drivers (`17.40-514569`)](https://www.amd.com/en/support/kb/release-notes/rn-prorad-lin-amdgpupro-17-40-0) on the host machine and then run the docker image with `--device=/dev/dri --device=/dev/kfd --group-add=video`.
+- install the [`AMDGPU-Pro` drivers (`18.40-673869`)](https://www.amd.com/en/support/kb/release-notes/rn-prorad-lin-18-40) on the host machine and then run the docker image with `--device=/dev/dri --device=/dev/kfd --group-add=video`.
 
 You can verify that everything is working on the host with the following commands
 
@@ -69,7 +69,7 @@ You can adjust the following docker build args
 
 - `CUDA_VERSION`: CUDA container version (default is `10.2`)
 - `CUDA_UBUNTU_VERSION`: Ubuntu version of CUDA container (default is `16.04`)
-- `AMDGPU_VERSION`: AMD driver version (default is `17.40-514569`)
+- `AMDGPU_VERSION`: AMD driver version (default is `18.40-673869`)
 - `ALPINE_VERSION`: image to use for alpine minimalist container (default is `latest`)
 
 ## Donations

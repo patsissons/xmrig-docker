@@ -1,6 +1,6 @@
 ARG CUDA_VERSION=10.2
 ARG CUDA_UBUNTU_VERSION=16.04
-ARG AMDGPU_VERSION=17.40-514569
+ARG AMDGPU_VERSION=18.40-673869
 ARG GIT_REPOSITORY=https://github.com/xmrig/xmrig.git
 ARG GIT_BRANCH=v6.3.0
 
@@ -67,8 +67,8 @@ ARG AMDGPU_VERSION
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
-ENV AMDGPU_DRIVER_NAME=amdgpu-pro-${AMDGPU_VERSION}
-ENV AMDGPU_DRIVER_URI=https://www2.ati.com/drivers/linux/ubuntu/${AMDGPU_DRIVER_NAME}.tar.xz
+ENV AMDGPU_DRIVER_NAME=amdgpu-pro-${AMDGPU_VERSION}-ubuntu-${CUDA_UBUNTU_VERSION}
+ENV AMDGPU_DRIVER_URI=https://drivers.amd.com/drivers/linux/${AMDGPU_DRIVER_NAME}.tar.xz
 ENV PACKAGE_DEPS "ca-certificates libhwloc5 libmicrohttpd10 libssl1.0.0 libuv1 wget xz-utils"
 
 RUN set -x \
