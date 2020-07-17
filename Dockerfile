@@ -15,7 +15,7 @@ ARG GIT_BRANCH_CUDA
 ENV DEBIAN_FRONTEND=noninteractive \
     GIT_REPOSITORY=${GIT_REPOSITORY_CUDA} \
     GIT_BRANCH=${GIT_BRANCH_CUDA}
-ENV CMAKE_FLAGS "-DCUDA_LIB=/usr/local/cuda/lib64/stubs/libcuda.so -DCMAKE_CXX_FLAGS=-std=c++11"
+ENV CMAKE_FLAGS "-DCMAKE_BUILD_TYPE=Release -DCUDA_LIB=/usr/local/cuda/lib64/stubs/libcuda.so -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda -DCMAKE_CXX_FLAGS=-std=c++11"
 ENV PACKAGE_DEPS "build-essential cmake git"
 
 WORKDIR /tmp
@@ -39,7 +39,7 @@ ARG GIT_BRANCH
 ENV DEBIAN_FRONTEND=noninteractive \
     GIT_REPOSITORY=${GIT_REPOSITORY} \
     GIT_BRANCH=${GIT_BRANCH}
-ENV CMAKE_FLAGS "-DWITH_OPENCL=ON -DWITH_CUDA=ON -DWITH_NVML=ON"
+ENV CMAKE_FLAGS "-DCMAKE_BUILD_TYPE=Release -DWITH_OPENCL=ON -DWITH_CUDA=ON -DWITH_NVML=ON"
 ENV PACKAGE_DEPS "build-essential ca-certificates cmake git libhwloc-dev libmicrohttpd-dev libssl-dev libuv1-dev ocl-icd-opencl-dev"
 
 COPY donate-level.patch /tmp
@@ -72,7 +72,7 @@ ENV AMDGPU_DRIVER_URI=https://www2.ati.com/drivers/linux/ubuntu/${AMDGPU_DRIVER_
 ENV PACKAGE_DEPS "ca-certificates libhwloc5 libmicrohttpd10 libssl1.0.0 libuv1 wget xz-utils"
 
 RUN set -x \
-  && adduser --system --disabled-password --home /config miner \
+  # && adduser --system --disabled-password --home /config miner \
   && dpkg --add-architecture i386 \
   && apt-get update -qq \
   && apt-get install -qq --no-install-recommends -y ${PACKAGE_DEPS} \
@@ -91,7 +91,7 @@ RUN set -x \
 COPY --from=build /tmp/xmrig/xmrig /usr/local/bin/
 COPY --from=build-cuda /tmp/xmrig-cuda/libxmrig-cuda.so /usr/local/lib
 
-USER miner
+# USER miner
 
 WORKDIR /config
 VOLUME /config
