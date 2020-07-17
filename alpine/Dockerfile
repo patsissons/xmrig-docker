@@ -9,7 +9,7 @@ ARG GIT_BRANCH
 
 ENV GIT_REPOSITORY=${GIT_REPOSITORY} \
     GIT_BRANCH=${GIT_BRANCH}
-ENV CMAKE_FLAGS "-DWITH_OPENCL=OFF -DWITH_CUDA=OFF"
+ENV CMAKE_FLAGS "-DCMAKE_BUILD_TYPE=Release -DWITH_OPENCL=OFF -DWITH_CUDA=OFF -DWITH_NVML=OFF"
 
 COPY donate-level.patch /tmp
 
@@ -30,7 +30,7 @@ RUN  set -x \
 FROM alpine:${ALPINE_VERSION}
 
 RUN  set -x \
-  && adduser -S -D -h /config miner \
+  # && adduser -S -D -h /config miner \
   && apk update \
   && apk upgrade \
   && apk add --no-cache libmicrohttpd libuv openssl util-linux \
@@ -40,7 +40,7 @@ RUN  set -x \
 
 COPY --from=build /tmp/xmrig/xmrig /usr/local/bin/
 
-USER miner
+# USER miner
 
 WORKDIR /config
 VOLUME /config
