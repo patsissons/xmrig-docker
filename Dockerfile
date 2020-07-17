@@ -62,8 +62,20 @@ RUN  set -x \
 
 FROM nvidia/cuda:${CUDA_VERSION}-runtime-ubuntu${CUDA_UBUNTU_VERSION}
 
-ARG CUDA_UBUNTU_VERSION
 ARG AMDGPU_VERSION
+ARG BUILD_DATE
+ARG CUDA_UBUNTU_VERSION
+ARG CUDA_VERSION
+ARG GIT_BRANCH
+ARG VCS_REF
+
+LABEL org.label-schema.build-date="${BUILD_DATE}" \
+      org.label-schema.name="xmrig" \
+      org.label-schema.description="xmrig CUDA/AMD" \
+      org.label-schema.url="https://github.com/patsissons/xmrig-docker/blob/master/README.md" \
+      org.label-schema.vcs-url="https://github.com/patsissons/xmrig-docker" \
+      org.label-schema.vcs-ref="${VCS_REF}" \
+      org.label-schema.version="${GIT_BRANCH}-ubuntu${CUDA_UBUNTU_VERSION}-cuda${CUDA_VERSION}-amd${AMDGPU_VERSION}"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
