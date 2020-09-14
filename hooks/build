@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -ex
+
+BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+docker build \
+  -f $DOCKERFILE_PATH \
+  --cache-from $IMAGE_NAME \
+  --build-arg BUILD_DATE=$BUILD_DATE \
+  --build-arg VCS_REF=$SOURCE_COMMIT \
+  -t $IMAGE_NAME .

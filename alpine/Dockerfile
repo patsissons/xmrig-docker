@@ -29,6 +29,18 @@ RUN  set -x \
 
 FROM alpine:${ALPINE_VERSION}
 
+ARG BUILD_DATE
+ARG GIT_BRANCH
+ARG VCS_REF
+
+LABEL org.label-schema.build-date="${BUILD_DATE}" \
+      org.label-schema.name="xmrig" \
+      org.label-schema.description="xmrig for alpine" \
+      org.label-schema.url="https://github.com/patsissons/xmrig-docker/blob/master/README.md" \
+      org.label-schema.vcs-url="https://github.com/patsissons/xmrig-docker" \
+      org.label-schema.vcs-ref="${VCS_REF}" \
+      org.label-schema.version="${GIT_BRANCH}-alpine"
+
 RUN  set -x \
   # && adduser -S -D -h /config miner \
   && apk update \
