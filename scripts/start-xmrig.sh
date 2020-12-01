@@ -47,7 +47,7 @@ docker ps -aq --filter name=xmrig --filter status=running | xargs --no-run-if-em
 # start new container
 set -ex && \
 docker run \
-  --privileged -d --restart always \
+  --privileged -d --restart always --user root \
   -it --name $NAME \
   -v xmrig-config:/config \
   -v /lib/modules:/lib/modules:ro \
