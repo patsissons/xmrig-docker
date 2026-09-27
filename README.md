@@ -56,6 +56,16 @@ You can verify that everythign is working on the host with the following command
 
 This image uses a multi-stage build, all that should be required is `docker build .` to build the latest image.
 
+### Image variants
+
+|Dockerfile|Description|
+|-|-|
+|`Dockerfile`|Ubuntu based image with CUDA (NVIDIA) and OpenCL (AMD) GPU support|
+|`alpine/Dockerfile`|CPU-only alpine image, dynamically linked against alpine packages (`libuv`, `openssl`, `hwloc`, etc.) that are also installed in the runtime image|
+|`alpine-static/Dockerfile`|CPU-only alpine image built with the [static build](https://xmrig.com/docs/miner/build/alpine) from the xmrig docs; `libuv`, `openssl` and `hwloc` are compiled from source into a single static binary, so the runtime image needs no extra packages|
+
+The alpine variants must be built from the repository root so that `donate-level.patch` is in the build context (e.g. `docker build -f alpine-static/Dockerfile .`).
+
 ### Environment
 
 You can adjust the following docker environment variables to customize the build process.

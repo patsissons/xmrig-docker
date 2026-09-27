@@ -10,5 +10,4 @@ docker build \
   -f $DOCKERFILE_PATH \
   --cache-from $IMAGE_NAME \
   --build-arg BUILD_DATE=$BUILD_DATE \
-  --build-arg VCS_REF=$SOURCE_COMMIT \
   -t $IMAGE_NAME .
