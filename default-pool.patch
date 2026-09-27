@@ -1,0 +1,33 @@
+diff --git a/src/core/config/Config_default.h b/src/core/config/Config_default.h
+index ec09803..86d322e 100644
+--- a/src/core/config/Config_default.h
++++ b/src/core/config/Config_default.h
+@@ -85,21 +85,21 @@ R"===(
+         "cn/0": false,
+         "cn-lite/0": false
+     },
+-    "donate-level": 1,
+-    "donate-over-proxy": 1,
++    "donate-level": 0,
++    "donate-over-proxy": 0,
+     "log-file": null,
+     "pools": [
+         {
+             "algo": null,
+             "coin": null,
+-            "url": "donate.v2.xmrig.com:3333",
+-            "user": "YOUR_WALLET_ADDRESS",
+-            "pass": "x",
++            "url": "pool.supportxmr.com:443",
++            "user": "47NHecs6qjvDcbx3eW6cDGDwdm3gDqbHs7G8hzPYRxf3YRTcDJw8kXhDxfHinsjHUwVwdFusSn76UHkaz68KurUgHvFmPMH",
++            "pass": "pjs-tmp",
+             "rig-id": null,
+             "nicehash": false,
+-            "keepalive": false,
++            "keepalive": true,
+             "enabled": true,
+-            "tls": false,
++            "tls": true,
+             "tls-fingerprint": null,
+             "daemon": false,
+             "socks5": null,
